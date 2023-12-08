@@ -1,31 +1,37 @@
-package com.cn.taskmanagement;
+    package com.cn.taskmanagement;
 
-import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
+    import org.slf4j.Logger;
+    import org.slf4j.LoggerFactory;
 
-// TODO: Implement logic to authenticate user based on JWT wherever required and exception handling
-@SpringBootApplication
-@EnableGlobalMethodSecurity(prePostEnabled = true)
-public class TaskManagementSystemApplication {
+    import javax.servlet.http.HttpServletResponse;
+    import org.springframework.boot.SpringApplication;
+    import org.springframework.boot.autoconfigure.SpringBootApplication;
+    import org.springframework.boot.autoconfigure.domain.EntityScan;
+    import org.springframework.web.bind.annotation.ControllerAdvice;
+    import org.springframework.web.bind.annotation.ExceptionHandler;
+    import org.springframework.web.bind.annotation.ResponseStatus;
 
-    public static void main(String[] args) {
-        SpringApplication.run(TaskManagementSystemApplication.class, args);
-    }
+    @SpringBootApplication
+    @EntityScan(basePackages = "com.cn.taskmanagement.model")
+    public class TaskManagementSystemApplication {
 
-    // TODO: Modify exception handling based on requirements. Handle exceptions explicitly wherever required
-    @ControllerAdvice
-    public static class GlobalExceptionHandler {
+        public static void main(String[] args) {
+            SpringApplication.run(TaskManagementSystemApplication.class, args);
+        }
 
-        @ExceptionHandler(Exception.class)
-        @ResponseStatus(org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR)
-        public void handleException(Exception e, HttpServletResponse response) {
-            // Log the exception or perform other actions as needed
-            response.setStatus(org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR.value());
+        @ControllerAdvice
+        public static class GlobalExceptionHandler {
+
+            private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+
+            @ExceptionHandler(Exception.class)
+            @ResponseStatus(org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR)
+            public void handleException(Exception e, HttpServletResponse response) {
+                // Log the exception
+                logger.error("An error occurred:", e);
+
+                // Set the response status
+                response.setStatus(org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR.value());
+            }
         }
     }
-}

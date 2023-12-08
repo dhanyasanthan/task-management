@@ -8,14 +8,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/projects")
 public class ProjectController {
 
     @Autowired
-    private ProjectService projectService;
+    private final ProjectService projectService;
 
+    @Autowired
     public ProjectController(ProjectService projectService) {
         this.projectService = projectService;
     }
@@ -26,7 +28,7 @@ public class ProjectController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Project> getProjectById(@PathVariable Long id) {
+    public ResponseEntity<Project> getProjectById(@PathVariable UUID id) {
         return projectService.getProjectById(id)
                 .map(project -> new ResponseEntity<>(project, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -39,14 +41,14 @@ public class ProjectController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Project> updateProject(@PathVariable Long id, @RequestBody Project updatedProject) {
+    public ResponseEntity<Project> updateProject(@PathVariable UUID id, @RequestBody Project updatedProject) {
         return projectService.updateProject(id, updatedProject)
                 .map(project -> new ResponseEntity<>(project, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProject(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteProject(@PathVariable UUID id) {
         boolean deleted = projectService.deleteProject(id);
         return deleted ? new ResponseEntity<>(HttpStatus.NO_CONTENT) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }

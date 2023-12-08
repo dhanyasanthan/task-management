@@ -1,33 +1,22 @@
-package com.cn.taskmanagement.model;
+package com.cn.taskmanagement.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Objects;
 import java.util.UUID;
 
-@Entity
-public class Task {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class TaskDto {
     private UUID id;
     private String title;
     private String description;
     private String status;
     private String priority;
-
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime deadline;
 
-    // Constructors
-
-    public Task() {
-        // Default constructor
+    // Default constructor (needed for Jackson deserialization)
+    public TaskDto() {
     }
 
-    public Task(String title, String description, String status, String priority, LocalDateTime deadline) {
+    // Custom constructor
+    public TaskDto(String title, String description, String status, String priority, LocalDateTime deadline) {
         this.title = title;
         this.description = description;
         this.status = status;
@@ -35,7 +24,8 @@ public class Task {
         this.deadline = deadline;
     }
 
-    // Getters and Setters
+    // Getters and setters
+
     public UUID getId() {
         return id;
     }
@@ -84,20 +74,15 @@ public class Task {
         this.deadline = deadline;
     }
 
-    // equals and hashCode
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-        Task task = (Task) o;
-        return Objects.equals(id, task.id);
+    private ProjectDto project;
+
+    // Getters and setters for the project field
+
+    public ProjectDto getProject() {
+        return project;
     }
 
-
-    // Many tasks can belong to one project
-    @ManyToOne
-    @JoinColumn(name = "project_id")
-    private Project project;
+    public void setProject(ProjectDto project) {
+        this.project = project;
+    }
 }

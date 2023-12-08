@@ -2,6 +2,7 @@ package com.cn.taskmanagement.model;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 import javax.persistence.*;
 
@@ -9,7 +10,7 @@ import javax.persistence.*;
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private UUID id;
 
     private String projectName;
 
@@ -24,11 +25,11 @@ public class Project {
     }
 
     // Getters and Setters
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
