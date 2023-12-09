@@ -2,7 +2,6 @@ package com.cn.taskmanagement.service;
 
 import com.cn.taskmanagement.model.Project;
 import com.cn.taskmanagement.repository.ProjectRepository;
-import com.cn.taskmanagement.service.ProjectService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -28,11 +27,14 @@ class ProjectServiceTest {
     @InjectMocks
     private ProjectService projectService;
 
-    @Test
     void getAllProjects() {
         // Arrange
-        Project project1 = new Project("Project 1");
-        Project project2 = new Project("Project 2");
+        Project project1 = new Project();
+        project1.setProjectName("Project 1");
+
+        Project project2 = new Project();
+        project2.setProjectName("Project 2");
+
         List<Project> projects = Arrays.asList(project1, project2);
 
         when(projectRepository.findAll()).thenReturn(projects);
@@ -54,7 +56,8 @@ class ProjectServiceTest {
     void getProjectById_ProjectExists() {
         // Arrange
         UUID projectId = UUID.randomUUID();
-        Project project = new Project("Existing Project");
+        Project project = new Project();
+        project.setProjectName("Existing Project");
 
         when(projectRepository.findById(projectId)).thenReturn(Optional.of(project));
 
@@ -91,7 +94,8 @@ class ProjectServiceTest {
     @Test
     void createProject() {
         // Arrange
-        Project project = new Project("New Project");
+        Project project = new Project();
+        project.setProjectName("New Project");
 
         when(projectRepository.save(project)).thenReturn(project);
 
@@ -110,8 +114,10 @@ class ProjectServiceTest {
     void updateProject_ProjectExists() {
         // Arrange
         UUID projectId = UUID.randomUUID();
-        Project updatedProject = new Project("Updated Project");
-        Project existingProject = new Project("Existing Project");
+        Project existingProject = new Project();
+        existingProject.setProjectName("Updated Project");
+        Project updatedProject = new Project();
+        updatedProject.setProjectName("Existing Project");
 
         when(projectRepository.findById(projectId)).thenReturn(Optional.of(existingProject));
         when(projectRepository.save(existingProject)).thenReturn(existingProject);
@@ -133,7 +139,9 @@ class ProjectServiceTest {
     void updateProject_ProjectNotExists() {
         // Arrange
         UUID projectId = UUID.randomUUID();
-        Project updatedProject = new Project("Updated Project");
+
+        Project updatedProject = new Project();
+        updatedProject.setProjectName("Updated Project");
 
         when(projectRepository.findById(projectId)).thenReturn(Optional.empty());
 
@@ -152,7 +160,8 @@ class ProjectServiceTest {
     void deleteProject_ProjectExists() {
         // Arrange
         UUID projectId = UUID.randomUUID();
-        Project existingProject = new Project("Existing Project");
+        Project existingProject = new Project();
+        existingProject.setProjectName("Existing Project");
 
         when(projectRepository.findById(projectId)).thenReturn(Optional.of(existingProject));
 

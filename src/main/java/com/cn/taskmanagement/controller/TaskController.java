@@ -2,10 +2,7 @@ package com.cn.taskmanagement.controller;
 
 import com.cn.taskmanagement.dto.SortingAndPaginationParams;
 import com.cn.taskmanagement.dto.TaskDto;
-import com.cn.taskmanagement.mapper.TaskMapper;
-import com.cn.taskmanagement.model.Task;
 import com.cn.taskmanagement.service.TaskService;
-import com.cn.taskmanagement.service.usecase.UpdateTaskUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

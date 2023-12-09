@@ -20,5 +20,4 @@ public interface TaskRepository extends JpaRepository<Task, UUID> {
     void batchUpdateStatus(@Param("taskIds") List<UUID> taskIds, @Param("newStatus") String newStatus);
 
 
-    // Additional custom queries can be added if needed
 }

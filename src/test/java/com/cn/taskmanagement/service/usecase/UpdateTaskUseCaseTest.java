@@ -1,8 +1,8 @@
 package com.cn.taskmanagement.service.usecase;
+
 import com.cn.taskmanagement.dto.TaskDto;
 import com.cn.taskmanagement.model.Task;
 import com.cn.taskmanagement.repository.TaskRepository;
-import com.cn.taskmanagement.service.usecase.UpdateTaskUseCase;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -14,7 +14,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.Optional;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)

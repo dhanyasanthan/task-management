@@ -19,6 +19,11 @@ public class Project {
         // Default constructor
     }
 
+    public Project(UUID id, String projectName) {
+        this.id = id;
+        this.projectName = projectName;
+    }
+
     public Project(String projectName, List<Task> tasks) {
         this.projectName = projectName;
         this.tasks = tasks;

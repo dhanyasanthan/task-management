@@ -2,10 +2,8 @@ package com.cn.taskmanagement.service.usecase;
 
 import com.cn.taskmanagement.dto.SortingAndPaginationParams;
 import com.cn.taskmanagement.dto.TaskDto;
-import com.cn.taskmanagement.mapper.TaskMapper;
 import com.cn.taskmanagement.model.Task;
 import com.cn.taskmanagement.repository.TaskRepository;
-import com.cn.taskmanagement.service.usecase.TaskServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -15,7 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.time.LocalDateTime;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
