@@ -4,6 +4,7 @@ import com.cn.taskmanagement.dto.SortingAndPaginationParams;
 import com.cn.taskmanagement.dto.TaskDto;
 import com.cn.taskmanagement.mapper.TaskMapper;
 import com.cn.taskmanagement.model.Task;
+import com.cn.taskmanagement.repository.ProjectRepository;
 import com.cn.taskmanagement.repository.TaskRepository;
 import com.cn.taskmanagement.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -21,13 +23,15 @@ import java.util.stream.Collectors;
 @Service
 public class TaskServiceImpl implements TaskService {
 
-    @Autowired
     private final TaskRepository taskRepository;
+    private final ProjectRepository projectRepository;
 
-
-    public TaskServiceImpl(TaskRepository taskRepository) {
+    @Autowired
+    public TaskServiceImpl(TaskRepository taskRepository, ProjectRepository projectRepository) {
         this.taskRepository = taskRepository;
+        this.projectRepository = projectRepository;
     }
+
 
     @Override
     public List<TaskDto> getAllTasks() {
@@ -50,48 +54,55 @@ public class TaskServiceImpl implements TaskService {
                 .collect(Collectors.toList());
     }
 
-    @Override
     public TaskDto createTask(TaskDto taskDto) {
-        Task task = TaskMapper.INSTANCE.taskDtoToTask(taskDto);
-        Task createdTask = taskRepository.save(task);
-        return TaskMapper.INSTANCE.taskToTaskDto(createdTask);
+        // Validate if the project with the given projectId exists
+        validateProjectExistence(taskDto.getProjectId());
+
+        Task newTask = TaskMapper.INSTANCE.taskDtoToTask(taskDto);
+        Task savedTask = taskRepository.save(newTask);
+        return TaskMapper.INSTANCE.taskToTaskDto(savedTask);
+    }
+
+    private void validateProjectExistence(UUID projectId) {
+        if (!projectRepository.existsById(projectId)) {
+            throw new EntityNotFoundException("Project not found with id: " + projectId);
+        }
     }
 
     @Override
     public Optional<TaskDto> updateTask(UUID taskId, TaskDto updatedTaskDto) {
-        Optional<Task> existingTaskOptional = taskRepository.findById(taskId);
-        if (!existingTaskOptional.isPresent()) {
-            // Handle non-existent task case
+        Optional<Task> existingTaskOptional = getExistingTask(taskId);
+        if (existingTaskOptional.isEmpty() || !isValidForUpdateOrDelete(existingTaskOptional.get())) {
             return Optional.empty();
         }
-        Task existingTask = existingTaskOptional.get();
 
-        if (isValidForUpdateOrDelete(existingTask)) {
-
-            // Update task properties
-            updateTaskProperties(existingTask, updatedTaskDto);
-
-            // Save the updated task
-            Task savedTask = saveUpdatedTask(existingTask);
-            return Optional.ofNullable(TaskMapper.INSTANCE.taskToTaskDto(savedTask));
-        } else {
+        try {
+            Task updatedTask = updateTaskProperties(existingTaskOptional.get(), updatedTaskDto);
+            if (updateTaskInRepository(updatedTask)) {
+                return Optional.ofNullable(TaskMapper.INSTANCE.taskToTaskDto(updatedTask));
+            } else {
+                return Optional.empty(); // Indicate that the update is not valid
+            }
+        } catch (Exception e) {
             return Optional.empty(); // Indicate that the update is not valid
         }
     }
 
-    private Task saveUpdatedTask(Task task) {
-        return taskRepository.save(task);
+    private Optional<Task> getExistingTask(UUID taskId) {
+        return taskRepository.findById(taskId);
     }
 
 
+    private boolean updateTaskInRepository(Task task) {
+        // Additional validation or business logic before updating in the repository
+        Task savedTask = taskRepository.save(task);
+        return true; // Return true if the update was successful
+    }
+
     @Override
-    public void updateTaskProperties(Task existingTask, TaskDto updatedTaskDto) {
-        existingTask.setTitle(updatedTaskDto.getTitle());
-        existingTask.setDescription(updatedTaskDto.getDescription());
-        existingTask.setStatus(updatedTaskDto.getStatus());
-        existingTask.setPriority(updatedTaskDto.getPriority());
-        existingTask.setDeadline(updatedTaskDto.getDeadline());
-        // Update other properties as needed
+    public Task updateTaskProperties(Task existingTask, TaskDto updatedTaskDto) {
+        // Use a mapper to update the task properties
+        return TaskMapper.INSTANCE.updateTaskFromDto(existingTask, updatedTaskDto);
     }
 
     @Override
@@ -133,4 +144,5 @@ public class TaskServiceImpl implements TaskService {
     public void batchUpdateTaskStatus(List<UUID> taskIds, String newStatus) {
         taskRepository.batchUpdateStatus(taskIds, newStatus);
     }
+
 }

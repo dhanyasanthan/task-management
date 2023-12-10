@@ -12,7 +12,6 @@ import java.util.UUID;
 
 @Repository
 public interface TaskRepository extends JpaRepository<Task, UUID> {
-    List<Task> findByTitle(String title);
 
     //Update batch tasks
     @Modifying
@@ -20,4 +19,5 @@ public interface TaskRepository extends JpaRepository<Task, UUID> {
     void batchUpdateStatus(@Param("taskIds") List<UUID> taskIds, @Param("newStatus") String newStatus);
 
 
+    List<Task> findByTitle(String title);
 }

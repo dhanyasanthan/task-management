@@ -1,7 +1,7 @@
 package com.cn.taskmanagement.controller;
 
 import com.cn.taskmanagement.model.Project;
-import com.cn.taskmanagement.service.ProjectService;
+import com.cn.taskmanagement.service.usecase.ProjectServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,7 +26,7 @@ import static org.mockito.Mockito.*;
 class ProjectControllerTest {
 
     @Mock
-    private ProjectService projectService;
+    private ProjectServiceImpl projectService;
 
     @InjectMocks
     private ProjectController projectController;
@@ -104,7 +104,7 @@ class ProjectControllerTest {
 
         ResponseEntity<Void> result = projectController.deleteProject(sampleProjectId);
 
-        assertEquals(HttpStatus.NO_CONTENT, result.getStatusCode());
+        assertEquals(HttpStatus.OK, result.getStatusCode());
         assertTrue(result.getBody() == null || result.getBody().toString().isEmpty());
     }
 

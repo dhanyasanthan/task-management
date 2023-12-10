@@ -1,15 +1,19 @@
 package com.cn.taskmanagement.model;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-import javax.persistence.*;
-
 @Entity
+@Table(name = "project", schema = "public")
 public class Project {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(name = "id", columnDefinition = "BINARY(16)")
     private UUID id;
 
     private String projectName;
@@ -71,7 +75,7 @@ public class Project {
     }
 
     // One project can have multiple tasks
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Task> tasks;
 
 }

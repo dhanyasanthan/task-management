@@ -11,17 +11,34 @@ public class TaskDto {
     private String priority;
     private LocalDateTime deadline;
 
-    // Default constructor (needed for Jackson deserialization)
+    private UUID projectId;
+
+    // Default constructor
     public TaskDto() {
+        // Initialize any default values if needed
     }
 
     // Custom constructor
+    public TaskDto(UUID projectId) {
+        this.projectId = projectId;
+    }
+
     public TaskDto(String title, String description, String status, String priority, LocalDateTime deadline) {
         this.title = title;
         this.description = description;
         this.status = status;
         this.priority = priority;
         this.deadline = deadline;
+    }
+
+    // Custom constructor
+    public TaskDto(String title, String description, String status, String priority, LocalDateTime deadline, UUID projectId) {
+        this.title = title;
+        this.description = description;
+        this.status = status;
+        this.priority = priority;
+        this.deadline = deadline;
+        this.projectId = projectId;
     }
 
     // Getters and setters
@@ -76,7 +93,6 @@ public class TaskDto {
 
     private ProjectDto project;
 
-    // Getters and setters for the project field
 
     public ProjectDto getProject() {
         return project;
@@ -85,4 +101,9 @@ public class TaskDto {
     public void setProject(ProjectDto project) {
         this.project = project;
     }
+
+    public UUID getProjectId() {
+        return projectId;
+    }
+
 }

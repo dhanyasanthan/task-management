@@ -52,13 +52,7 @@ class TaskControllerTest {
     }
 
     private TaskDto createSampleTaskDto() {
-        TaskDto taskDto = new TaskDto();
-        taskDto.setId(UUID.randomUUID());
-        taskDto.setTitle("Sample Task");
-        taskDto.setDescription("Sample description");
-        taskDto.setStatus("IN_PROGRESS");
-        taskDto.setPriority("HIGH");
-        taskDto.setDeadline(LocalDateTime.now().plusDays(7));
+        TaskDto taskDto = new TaskDto("Sample Task","Sample description","IN_PROGRESS","HIGH",LocalDateTime.of(2023, 12, 31, 23, 59));
         return taskDto;
     }
 

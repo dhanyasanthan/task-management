@@ -1,7 +1,8 @@
-package com.cn.taskmanagement.service;
+package com.cn.taskmanagement.service.usecase;
 
 import com.cn.taskmanagement.model.Project;
 import com.cn.taskmanagement.repository.ProjectRepository;
+import com.cn.taskmanagement.service.usecase.ProjectServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -19,13 +20,13 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-class ProjectServiceTest {
+class ProjectServiceImplTest {
 
     @Mock
     private ProjectRepository projectRepository;
 
     @InjectMocks
-    private ProjectService projectService;
+    private ProjectServiceImpl projectService;
 
     void getAllProjects() {
         // Arrange

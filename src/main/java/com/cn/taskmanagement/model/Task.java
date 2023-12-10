@@ -1,6 +1,7 @@
 package com.cn.taskmanagement.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -8,10 +9,13 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Entity
+@Table(name = "task", schema = "public")
 public class Task {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(name = "id", columnDefinition = "BINARY(16)")
     private UUID id;
     private String title;
     private String description;
@@ -97,7 +101,20 @@ public class Task {
 
 
     // Many tasks can belong to one project
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "project_id")
     private Project project;
+
+    public Project getProject() {
+        return project;
+    }
+
+    // Add a public setter for the "project" property
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    @SuppressWarnings("unused")
+    @Column(name = "project_id", insertable = false, updatable = false)
+    private UUID projectId;
 }

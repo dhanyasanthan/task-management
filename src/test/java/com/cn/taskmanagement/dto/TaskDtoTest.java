@@ -41,14 +41,7 @@ public class TaskDtoTest {
         LocalDateTime deadline = LocalDateTime.of(2023, 12, 31, 23, 59);
         ProjectDto projectDto = new ProjectDto(UUID.randomUUID(), "Project Name");
 
-        TaskDto taskDto = new TaskDto();
-        taskDto.setId(id);
-        taskDto.setTitle(title);
-        taskDto.setDescription(description);
-        taskDto.setStatus(status);
-        taskDto.setPriority(priority);
-        taskDto.setDeadline(deadline);
-        taskDto.setProject(projectDto);
+        TaskDto taskDto = new TaskDto(title,description,status,priority,deadline);
 
         // Assert
         assertEquals(id, taskDto.getId());

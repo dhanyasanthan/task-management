@@ -1,7 +1,7 @@
 package com.cn.taskmanagement.controller;
 
 import com.cn.taskmanagement.model.Project;
-import com.cn.taskmanagement.service.ProjectService;
+import com.cn.taskmanagement.service.usecase.ProjectServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,10 +15,10 @@ import java.util.UUID;
 public class ProjectController {
 
     @Autowired
-    private final ProjectService projectService;
+    private final ProjectServiceImpl projectService;
 
     @Autowired
-    public ProjectController(ProjectService projectService) {
+    public ProjectController(ProjectServiceImpl projectService) {
         this.projectService = projectService;
     }
 
@@ -40,6 +40,7 @@ public class ProjectController {
         return new ResponseEntity<>(createdProject, HttpStatus.CREATED);
     }
 
+
     @PutMapping("/{id}")
     public ResponseEntity<Project> updateProject(@PathVariable UUID id, @RequestBody Project updatedProject) {
         return projectService.updateProject(id, updatedProject)
@@ -50,6 +51,6 @@ public class ProjectController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProject(@PathVariable UUID id) {
         boolean deleted = projectService.deleteProject(id);
-        return deleted ? new ResponseEntity<>(HttpStatus.NO_CONTENT) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return deleted ? new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }
