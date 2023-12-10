@@ -112,15 +112,18 @@ public class TaskServiceImpl implements TaskService {
     }
 
     private List<Task> getSortedAndPaginatedTasks(SortingAndPaginationParams params) {
-        String sortBy = params.getSortBy();
-        String sortOrder = params.getSortOrder();
-        int page = params.getPage();
-        int size = params.getSize();
-
-        Sort sort = Sort.by(sortOrder.equals("asc") ? Sort.Direction.ASC : Sort.Direction.DESC, sortBy);
-        Pageable pageable = PageRequest.of(page, size, sort);
+        Sort sort = buildSort(params.getSortBy(), params.getSortOrder());
+        Pageable pageable = buildPageable(params.getPage(), params.getSize(), sort);
 
         return taskRepository.findAll(pageable).getContent();
+    }
+
+    private Sort buildSort(String sortBy, String sortOrder) {
+        return Sort.by(sortOrder.equals("asc") ? Sort.Direction.ASC : Sort.Direction.DESC, sortBy);
+    }
+
+    private Pageable buildPageable(int page, int size, Sort sort) {
+        return PageRequest.of(page, size, sort);
     }
 
     private List<TaskDto> mapTasksToDtos(List<Task> tasks) {

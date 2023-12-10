@@ -43,10 +43,15 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     public Optional<Project> updateProject(UUID projectId, Project updatedProject) {
-        return projectRepository.findById(projectId).map(existingProject -> {
-            existingProject.setProjectName(updatedProject.getProjectName());
-            return projectRepository.save(existingProject);
-        });
+        return projectRepository.findById(projectId)
+                .map(existingProject -> updateProjectProperties(existingProject, updatedProject))
+                .map(projectRepository::save);
+    }
+
+    private Project updateProjectProperties(Project existingProject, Project updatedProject) {
+        existingProject.setProjectName(updatedProject.getProjectName());
+        // You can add more property updates here if needed
+        return existingProject;
     }
 
     public boolean deleteProject(UUID projectId) {

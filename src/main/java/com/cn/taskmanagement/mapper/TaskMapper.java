@@ -1,8 +1,6 @@
 package com.cn.taskmanagement.mapper;
 
-import com.cn.taskmanagement.dto.ProjectDto;
 import com.cn.taskmanagement.dto.TaskDto;
-import com.cn.taskmanagement.model.Project;
 import com.cn.taskmanagement.model.Task;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -33,12 +31,6 @@ public interface TaskMapper {
     })
 
     Task updateTaskFromDto(Task task, TaskDto taskDto);
-
-
-    ProjectDto projectToProjectDto(Project project);
-
-    Project projectDtoToProject(ProjectDto projectDto);
-
 
     @Mappings({
             @Mapping(target = "id", ignore = true),
