@@ -18,6 +18,9 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+/**
+ * Unit tests for the {@link TaskServiceImpl} class.
+ */
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 class TaskServiceImplTest {
@@ -28,6 +31,9 @@ class TaskServiceImplTest {
     @InjectMocks
     private TaskServiceImpl taskService;
 
+    /**
+     * Test for retrieving all tasks.
+     */
     @Test
     void getAllTasks() {
         // Arrange
@@ -49,6 +55,9 @@ class TaskServiceImplTest {
         verifyNoMoreInteractions(taskRepository);
     }
 
+    /**
+     * Test for retrieving a task by its ID when the task exists.
+     */
     @Test
     void getTaskById_TaskExists() {
         // Arrange
@@ -69,6 +78,9 @@ class TaskServiceImplTest {
         verifyNoMoreInteractions(taskRepository);
     }
 
+    /**
+     * Test for retrieving a task by its ID when the task does not exist.
+     */
     @Test
     void getTaskById_TaskNotExists() {
         // Arrange
@@ -87,6 +99,9 @@ class TaskServiceImplTest {
         verifyNoMoreInteractions(taskRepository);
     }
 
+    /**
+     * Test for retrieving tasks by title.
+     */
     @Test
     void getTasksByTitle() {
         // Arrange
@@ -109,6 +124,9 @@ class TaskServiceImplTest {
         verifyNoMoreInteractions(taskRepository);
     }
 
+    /**
+     * Test for creating a new task.
+     */
     @Test
     void createTask() {
         // Arrange
@@ -128,6 +146,9 @@ class TaskServiceImplTest {
         verifyNoMoreInteractions(taskRepository);
     }
 
+    /**
+     * Test for updating an existing task when the task ID is valid.
+     */
     @Test
     void updateTask_ValidTaskId() {
         // Arrange
@@ -151,6 +172,9 @@ class TaskServiceImplTest {
         verifyNoMoreInteractions(taskRepository);
     }
 
+    /**
+     * Test for updating an existing task when the task ID is invalid.
+     */
     @Test
     void updateTask_InvalidTaskId() {
         // Arrange
@@ -170,6 +194,9 @@ class TaskServiceImplTest {
         verifyNoMoreInteractions(taskRepository);
     }
 
+    /**
+     * Test for deleting an existing task when the task ID is valid.
+     */
     @Test
     void deleteTask_ValidTaskId() {
         // Arrange
@@ -191,6 +218,9 @@ class TaskServiceImplTest {
         verifyNoMoreInteractions(taskRepository);
     }
 
+    /**
+     * Test for deleting a task when the task ID is invalid.
+     */
     @Test
     void deleteTask_InvalidTaskId() {
         // Arrange
@@ -209,6 +239,9 @@ class TaskServiceImplTest {
         verifyNoMoreInteractions(taskRepository);
     }
 
+    /**
+     * Test for batch updating task status.
+     */
     @Test
     void batchUpdateTaskStatus() {
         // Arrange
@@ -223,6 +256,9 @@ class TaskServiceImplTest {
         verifyNoMoreInteractions(taskRepository);
     }
 
+    /**
+     * Test for retrieving all tasks with sorting and pagination.
+     */
     @Test
     void getAllTasksWithSortingAndPagination() {
         // Arrange
@@ -245,6 +281,9 @@ class TaskServiceImplTest {
         verifyNoMoreInteractions(taskRepository);
     }
 
+    /**
+     * Test for retrieving all tasks with sorting and pagination when the result is an empty list.
+     */
     @Test
     void getAllTasksWithSortingAndPagination_EmptyList() {
         // Arrange
@@ -263,5 +302,4 @@ class TaskServiceImplTest {
         verifyNoMoreInteractions(taskRepository);
     }
 
-    // Add more test methods based on additional scenarios or business logic...
 }

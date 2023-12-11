@@ -11,10 +11,16 @@ import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Unit tests for the {@link TaskMapper} class.
+ */
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class TaskMapperTest {
 
+    /**
+     * Test mapping from Task to TaskDto.
+     */
     @Test
     public void testTaskToTaskDto() {
         // Arrange
@@ -31,6 +37,9 @@ public class TaskMapperTest {
         // Add more assertions for other fields
     }
 
+    /**
+     * Test mapping from TaskDto to Task.
+     */
     @Test
     public void testTaskDtoToTask() {
         // Arrange
@@ -44,8 +53,6 @@ public class TaskMapperTest {
         assertEquals("Description 1", task.getDescription());
         assertEquals("TODO", task.getStatus());
         assertEquals("High", task.getPriority());
-        // Add more assertions for other fields
     }
 
-    // Add more test cases for different scenarios as needed
 }

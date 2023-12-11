@@ -11,6 +11,7 @@ public interface ProjectService {
 
     Optional<Project> getProjectById(UUID projectId);
 
+    Project createProject(Project project);
 
     Optional<Project> updateProject(UUID projectId, Project updatedProject);
 

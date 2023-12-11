@@ -1,4 +1,5 @@
-import com.cn.taskmanagement.model.Task;
+package com.cn.taskmanagement.model;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -7,11 +8,19 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
+/**
+ * Unit tests for the {@link Task} class.
+ */
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class TaskTest {
 
+    /**
+     * Test equals and hashCode methods of Task.
+     */
     @Test
     public void testEqualsAndHashCode() {
         // Arrange
@@ -26,6 +35,9 @@ public class TaskTest {
         assertEquals(task1.hashCode(), task2.hashCode());
     }
 
+    /**
+     * Test getters and setters of Task.
+     */
     @Test
     public void testGettersAndSetters() {
         // Arrange
@@ -53,6 +65,9 @@ public class TaskTest {
         assertEquals(deadline, task.getDeadline());
     }
 
+    /**
+     * Test equals with different IDs.
+     */
     @Test
     public void testEqualsWithDifferentId() {
         // Arrange
@@ -65,6 +80,9 @@ public class TaskTest {
         assertNotEquals(task1, task2);
     }
 
+    /**
+     * Test equals with null IDs.
+     */
     @Test
     public void testEqualsWithNullId() {
         // Arrange
@@ -75,5 +93,4 @@ public class TaskTest {
         assertNotEquals(task1, task2);
     }
 
-    // Add more test cases as needed
 }

@@ -20,6 +20,9 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+/**
+ * Unit tests for the {@link TaskRepository} class.
+ */
 @ExtendWith(MockitoExtension.class)
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -34,6 +37,9 @@ class TaskRepositoryTest {
     @InjectMocks
     private TaskRepository taskRepository;
 
+    /**
+     * Test the batch update of task statuses in the repository.
+     */
     @Test
     void batchUpdateStatus_ShouldExecuteUpdateQuery() {
         // Arrange
@@ -51,4 +57,5 @@ class TaskRepositoryTest {
         verify(query).setParameter(eq("taskIds"), eq(taskIds));
         verify(query).setParameter(eq("newStatus"), eq(newStatus));
     }
+
 }

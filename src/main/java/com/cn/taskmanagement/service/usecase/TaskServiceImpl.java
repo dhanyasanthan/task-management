@@ -20,6 +20,9 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+/**
+ * Service implementation for managing Task entities.
+ */
 @Service
 public class TaskServiceImpl implements TaskService {
 
@@ -32,7 +35,11 @@ public class TaskServiceImpl implements TaskService {
         this.projectRepository = projectRepository;
     }
 
-
+    /**
+     * Get a list of all tasks.
+     *
+     * @return List of all tasks.
+     */
     @Override
     public List<TaskDto> getAllTasks() {
         List<Task> tasks = taskRepository.findAll();
@@ -41,11 +48,23 @@ public class TaskServiceImpl implements TaskService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Get a task by its unique identifier.
+     *
+     * @param taskId The unique identifier of the task.
+     * @return Optional containing the task if found, otherwise empty.
+     */
     @Override
     public Optional<TaskDto> getTaskById(UUID taskId) {
         return taskRepository.findById(taskId).map(TaskMapper.INSTANCE::taskToTaskDto);
     }
 
+    /**
+     * Get tasks by title.
+     *
+     * @param title The title to search for.
+     * @return List of tasks with the specified title.
+     */
     @Override
     public List<TaskDto> getTasksByTitle(String title) {
         List<Task> tasks = taskRepository.findByTitle(title);
@@ -54,6 +73,12 @@ public class TaskServiceImpl implements TaskService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Create a new task.
+     *
+     * @param taskDto The task DTO to create.
+     * @return The created task DTO.
+     */
     public TaskDto createTask(TaskDto taskDto) {
         // Validate if the project with the given projectId exists
         validateProjectExistence(taskDto.getProjectId());
@@ -69,6 +94,13 @@ public class TaskServiceImpl implements TaskService {
         }
     }
 
+    /**
+     * Update an existing task.
+     *
+     * @param taskId         The unique identifier of the task to update.
+     * @param updatedTaskDto The updated task DTO.
+     * @return Optional containing the updated task if found, otherwise empty.
+     */
     @Override
     public Optional<TaskDto> updateTask(UUID taskId, TaskDto updatedTaskDto) {
         Optional<Task> existingTaskOptional = getExistingTask(taskId);
@@ -99,12 +131,25 @@ public class TaskServiceImpl implements TaskService {
         return true; // Return true if the update was successful
     }
 
+    /**
+     * Update task properties.
+     *
+     * @param existingTask    The existing task entity.
+     * @param updatedTaskDto  The updated task DTO.
+     * @return The updated task entity.
+     */
     @Override
     public Task updateTaskProperties(Task existingTask, TaskDto updatedTaskDto) {
         // Use a mapper to update the task properties
         return TaskMapper.INSTANCE.updateTaskFromDto(existingTask, updatedTaskDto);
     }
 
+    /**
+     * Get all tasks with sorting and pagination.
+     *
+     * @param params Sorting and pagination parameters.
+     * @return List of tasks with sorting and pagination applied.
+     */
     @Override
     public List<TaskDto> getAllTasksWithSortingAndPagination(SortingAndPaginationParams params) {
         List<Task> sortedAndPaginatedTasks = getSortedAndPaginatedTasks(params);
@@ -132,6 +177,12 @@ public class TaskServiceImpl implements TaskService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Delete a task by its unique identifier.
+     *
+     * @param taskId The unique identifier of the task to delete.
+     * @return True if the task was deleted, false otherwise.
+     */
     @Override
     public boolean deleteTask(UUID taskId) {
         Optional<Task> existingTaskOptional = taskRepository.findById(taskId);
@@ -143,6 +194,12 @@ public class TaskServiceImpl implements TaskService {
         return "pending".equals(task.getStatus()) || "in-progress".equals(task.getStatus());
     }
 
+    /**
+     * Batch update the status of tasks.
+     *
+     * @param taskIds   List of task IDs to update.
+     * @param newStatus The new status to set for the tasks.
+     */
     @Transactional
     public void batchUpdateTaskStatus(List<UUID> taskIds, String newStatus) {
         taskRepository.batchUpdateStatus(taskIds, newStatus);

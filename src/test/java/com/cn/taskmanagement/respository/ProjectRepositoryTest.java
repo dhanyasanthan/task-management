@@ -17,6 +17,9 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
+/**
+ * Unit tests for the {@link ProjectRepository} class.
+ */
 @ExtendWith(MockitoExtension.class)
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -28,6 +31,9 @@ class ProjectRepositoryTest {
     @InjectMocks
     private ProjectRepository projectRepositoryUnderTest;
 
+    /**
+     * Test the retrieval of all projects from the repository.
+     */
     @Test
     void testGetAllProjects() {
         // Arrange
@@ -45,6 +51,9 @@ class ProjectRepositoryTest {
         verify(projectRepository).findAll();
     }
 
+    /**
+     * Test the retrieval of a project by ID from the repository.
+     */
     @Test
     void testGetProjectById() {
         // Arrange
@@ -60,5 +69,4 @@ class ProjectRepositoryTest {
         verify(projectRepository).findById(projectId);
     }
 
-    // Add more test cases for other repository methods as needed
 }

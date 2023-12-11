@@ -2,7 +2,6 @@ package com.cn.taskmanagement.service.usecase;
 
 import com.cn.taskmanagement.model.Project;
 import com.cn.taskmanagement.repository.ProjectRepository;
-import com.cn.taskmanagement.service.usecase.ProjectServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -18,6 +17,9 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+/**
+ * Unit tests for the {@link ProjectServiceImpl} class.
+ */
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 class ProjectServiceImplTest {
@@ -28,6 +30,9 @@ class ProjectServiceImplTest {
     @InjectMocks
     private ProjectServiceImpl projectService;
 
+    /**
+     * Test for retrieving all projects.
+     */
     void getAllProjects() {
         // Arrange
         Project project1 = new Project();
@@ -53,6 +58,9 @@ class ProjectServiceImplTest {
         verifyNoMoreInteractions(projectRepository);
     }
 
+    /**
+     * Test for retrieving a project by its ID when the project exists.
+     */
     @Test
     void getProjectById_ProjectExists() {
         // Arrange
@@ -74,6 +82,9 @@ class ProjectServiceImplTest {
         verifyNoMoreInteractions(projectRepository);
     }
 
+    /**
+     * Test for retrieving a project by its ID when the project does not exist.
+     */
     @Test
     void getProjectById_ProjectNotExists() {
         // Arrange
@@ -92,6 +103,9 @@ class ProjectServiceImplTest {
         verifyNoMoreInteractions(projectRepository);
     }
 
+    /**
+     * Test for creating a new project.
+     */
     @Test
     void createProject() {
         // Arrange
@@ -111,6 +125,9 @@ class ProjectServiceImplTest {
         verifyNoMoreInteractions(projectRepository);
     }
 
+    /**
+     * Test for updating an existing project when the project exists.
+     */
     @Test
     void updateProject_ProjectExists() {
         // Arrange
@@ -136,6 +153,9 @@ class ProjectServiceImplTest {
         verifyNoMoreInteractions(projectRepository);
     }
 
+    /**
+     * Test for updating an existing project when the project does not exist.
+     */
     @Test
     void updateProject_ProjectNotExists() {
         // Arrange
@@ -157,6 +177,9 @@ class ProjectServiceImplTest {
         verifyNoMoreInteractions(projectRepository);
     }
 
+    /**
+     * Test for deleting an existing project when the project exists.
+     */
     @Test
     void deleteProject_ProjectExists() {
         // Arrange
@@ -178,6 +201,9 @@ class ProjectServiceImplTest {
         verifyNoMoreInteractions(projectRepository);
     }
 
+    /**
+     * Test for deleting a project when the project does not exist.
+     */
     @Test
     void deleteProject_ProjectNotExists() {
         // Arrange
@@ -195,4 +221,5 @@ class ProjectServiceImplTest {
         verify(projectRepository, times(1)).findById(projectId);
         verifyNoMoreInteractions(projectRepository);
     }
+
 }

@@ -1,0 +1,9 @@
+com.cn.taskmanagement
+com.cn.taskmanagement.config
+com.cn.taskmanagement.controller
+com.cn.taskmanagement.dto
+com.cn.taskmanagement.mapper
+com.cn.taskmanagement.model
+com.cn.taskmanagement.repository
+com.cn.taskmanagement.service
+com.cn.taskmanagement.service.usecase

@@ -35,5 +35,7 @@ mvn spring-boot:run
 6. Run JUnit tests for controllers and services. Run the tests with:
 mvn test
 
+7. In IDE for e.g. Tools -> Generate JavaDoc -> <Select putput doc folder> -> Click on 'Generate'
+
 ### Docker
 docker build -t <image-name> .

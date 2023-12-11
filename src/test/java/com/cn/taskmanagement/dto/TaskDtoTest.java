@@ -7,8 +7,14 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Unit tests for the {@link TaskDto} class.
+ */
 public class TaskDtoTest {
 
+    /**
+     * Test for the equals and hashCode methods.
+     */
     @Test
     public void testEqualsAndHashCode() {
         // Arrange
@@ -30,6 +36,9 @@ public class TaskDtoTest {
         assertEquals(taskDto1.hashCode(), taskDto2.hashCode());
     }
 
+    /**
+     * Test for the getters and setters.
+     */
     @Test
     public void testGettersAndSetters() {
         // Arrange
@@ -53,6 +62,9 @@ public class TaskDtoTest {
         assertEquals(projectDto, taskDto.getProject());
     }
 
+    /**
+     * Test for not equals with different id.
+     */
     @Test
     public void testEqualsWithDifferentId() {
         // Arrange
@@ -74,6 +86,9 @@ public class TaskDtoTest {
         assertNotEquals(taskDto1, taskDto2);
     }
 
+    /**
+     * Test for equals with null id.
+     */
     @Test
     public void testEqualsWithNullId() {
         // Arrange
@@ -93,5 +108,4 @@ public class TaskDtoTest {
         assertEquals(taskDto1, taskDto2);
     }
 
-    // Add more test cases as needed
 }

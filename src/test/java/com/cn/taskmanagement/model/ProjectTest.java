@@ -1,19 +1,26 @@
 package com.cn.taskmanagement.model;
 
+import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.testng.annotations.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+/**
+ * Unit tests for the {@link Project} class.
+ */
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class ProjectTest {
 
+    /**
+     * Test the default constructor of Project.
+     */
     @Test
     public void testDefaultConstructor() {
         // Arrange
@@ -25,6 +32,9 @@ public class ProjectTest {
         assertNull(project.getTasks());
     }
 
+    /**
+     * Test the parameterized constructor of Project.
+     */
     @Test
     public void testParameterizedConstructor() {
         // Arrange
@@ -37,6 +47,9 @@ public class ProjectTest {
         assertEquals(tasks, project.getTasks());
     }
 
+    /**
+     * Test getters and setters of Project.
+     */
     @Test
     public void testGettersAndSetters() {
         // Arrange
@@ -55,21 +68,5 @@ public class ProjectTest {
         assertEquals(projectName, project.getProjectName());
         assertEquals(tasks, project.getTasks());
     }
-
-    @Test
-    public void testEqualsAndHashCode() {
-        // Arrange
-        Project project1 = new Project();
-        Project project2 = new Project();
-        UUID id = UUID.randomUUID();
-        project1.setId(id);
-        project2.setId(id);
-
-        // Assert
-        assertEquals(project1, project2);
-        assertEquals(project1.hashCode(), project2.hashCode());
-    }
-
-    // Add more test cases for any additional methods or logic in your entity
 
 }

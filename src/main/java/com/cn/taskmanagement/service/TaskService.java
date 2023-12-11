@@ -24,7 +24,7 @@ public interface TaskService {
 
     void batchUpdateTaskStatus(List<UUID> taskIds, String newStatus);
 
-    public Task updateTaskProperties(Task existingTask, TaskDto updatedTaskDto);
+    Task updateTaskProperties(Task existingTask, TaskDto updatedTaskDto);
 
     List<TaskDto> getAllTasksWithSortingAndPagination(SortingAndPaginationParams params);
 
