@@ -39,6 +39,6 @@ mvn test
  docker build -t <image-name> .
 
 ### Javadoc
- In IDE for e.g. Intellij:Tools -> Generate JavaDoc -> Select putput doc folder -> Click on Generate.
+ In IDE for e.g. Intellij: Tools -> Generate JavaDoc -> Select output doc folder -> Click on Generate.
 
 
