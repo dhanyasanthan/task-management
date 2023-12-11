@@ -82,7 +82,6 @@ public class TaskServiceImpl implements TaskService {
     public TaskDto createTask(TaskDto taskDto) {
         // Validate if the project with the given projectId exists
         validateProjectExistence(taskDto.getProjectId());
-
         Task newTask = TaskMapper.INSTANCE.taskDtoToTask(taskDto);
         Task savedTask = taskRepository.save(newTask);
         return TaskMapper.INSTANCE.taskToTaskDto(savedTask);

@@ -193,4 +193,22 @@ public class Task {
     @SuppressWarnings("unused")
     @Column(name = "project_id", insertable = false, updatable = false)
     private UUID projectId;
+
+    /**
+     * Gets the unique identifier of the associated project.
+     *
+     * @return The UUID of the associated project.
+     */
+    public UUID getProjectId() {
+        return projectId;
+    }
+
+    /**
+     * Sets the unique identifier of the associated project.
+     *
+     * @param projectId The UUID of the associated project to set.
+     */
+    public void setProjectId(UUID projectId) {
+        this.projectId = projectId;
+    }
 }

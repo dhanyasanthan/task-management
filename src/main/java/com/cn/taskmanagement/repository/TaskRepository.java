@@ -34,4 +34,5 @@ public interface TaskRepository extends JpaRepository<Task, UUID> {
      * @return List of tasks with the specified title.
      */
     List<Task> findByTitle(String title);
+
 }

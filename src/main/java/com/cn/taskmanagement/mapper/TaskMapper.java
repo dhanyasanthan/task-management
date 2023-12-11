@@ -24,6 +24,7 @@ public interface TaskMapper {
      */
     @Mappings({
             @Mapping(target = "project", source = "project"),
+            @Mapping(target = "projectId", source = "projectId"),
     })
     TaskDto taskToTaskDto(Task task);
 
@@ -50,7 +51,7 @@ public interface TaskMapper {
             @Mapping(target = "status", source = "taskDto.status"),
             @Mapping(target = "priority", source = "taskDto.priority"),
             @Mapping(target = "deadline", source = "taskDto.deadline"),
-            @Mapping(target = "project.id", source = "taskDto.projectId")
+            @Mapping(target = "projectId", source = "taskDto.projectId")
     })
 
     Task updateTaskFromDto(Task task, TaskDto taskDto);

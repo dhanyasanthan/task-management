@@ -1,5 +1,6 @@
 package com.cn.taskmanagement.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
@@ -15,6 +16,7 @@ public class TaskDto {
     private String priority;
     private LocalDateTime deadline;
 
+    @JsonProperty("projectId")
     private UUID projectId;
 
     // Default constructor
@@ -186,6 +188,16 @@ public class TaskDto {
     public UUID getProjectId() {
         return projectId;
     }
+
+    /**
+     * Sets the project ID for the task.
+     *
+     * @param projectId The project ID to set.
+     */
+    public void setProjectId(UUID projectId) {
+        this.projectId = projectId;
+    }
+
 
     /**
      * Compares two TaskDto objects for equality based on their unique identifiers.
