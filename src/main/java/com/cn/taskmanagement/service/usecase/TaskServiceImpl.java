@@ -1,6 +1,6 @@
 package com.cn.taskmanagement.service.usecase;
 
-import com.cn.taskmanagement.dto.SortingAndPaginationParams;
+import com.cn.taskmanagement.dto.SortingAndPaginationParamsDto;
 import com.cn.taskmanagement.dto.TaskDto;
 import com.cn.taskmanagement.mapper.TaskMapper;
 import com.cn.taskmanagement.model.Task;
@@ -151,12 +151,12 @@ public class TaskServiceImpl implements TaskService {
      * @return List of tasks with sorting and pagination applied.
      */
     @Override
-    public List<TaskDto> getAllTasksWithSortingAndPagination(SortingAndPaginationParams params) {
+    public List<TaskDto> getAllTasksWithSortingAndPagination(SortingAndPaginationParamsDto params) {
         List<Task> sortedAndPaginatedTasks = getSortedAndPaginatedTasks(params);
         return mapTasksToDtos(sortedAndPaginatedTasks);
     }
 
-    private List<Task> getSortedAndPaginatedTasks(SortingAndPaginationParams params) {
+    private List<Task> getSortedAndPaginatedTasks(SortingAndPaginationParamsDto params) {
         Sort sort = buildSort(params.getSortBy(), params.getSortOrder());
         Pageable pageable = buildPageable(params.getPage(), params.getSize(), sort);
 

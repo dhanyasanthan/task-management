@@ -1,6 +1,6 @@
 package com.cn.taskmanagement.service;
 
-import com.cn.taskmanagement.dto.SortingAndPaginationParams;
+import com.cn.taskmanagement.dto.SortingAndPaginationParamsDto;
 import com.cn.taskmanagement.dto.TaskDto;
 import com.cn.taskmanagement.model.Task;
 
@@ -26,6 +26,6 @@ public interface TaskService {
 
     Task updateTaskProperties(Task existingTask, TaskDto updatedTaskDto);
 
-    List<TaskDto> getAllTasksWithSortingAndPagination(SortingAndPaginationParams params);
+    List<TaskDto> getAllTasksWithSortingAndPagination(SortingAndPaginationParamsDto params);
 
 }

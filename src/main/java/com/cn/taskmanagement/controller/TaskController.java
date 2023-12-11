@@ -1,6 +1,6 @@
 package com.cn.taskmanagement.controller;
 
-import com.cn.taskmanagement.dto.SortingAndPaginationParams;
+import com.cn.taskmanagement.dto.SortingAndPaginationParamsDto;
 import com.cn.taskmanagement.dto.TaskDto;
 import com.cn.taskmanagement.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +52,7 @@ public class TaskController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size
     ) {
-        SortingAndPaginationParams params = new SortingAndPaginationParams(sortBy, sortOrder, page, size);
+        SortingAndPaginationParamsDto params = new SortingAndPaginationParamsDto(sortBy, sortOrder, page, size);
         List<TaskDto> tasks = taskService.getAllTasksWithSortingAndPagination(params);
         return new ResponseEntity<>(tasks, HttpStatus.OK);
     }

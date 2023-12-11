@@ -4,9 +4,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Unit tests for the {@link SortingAndPaginationParams} class.
+ * Unit tests for the {@link SortingAndPaginationParamsDto} class.
  */
-public class SortingAndPaginationParamsTest {
+public class SortingAndPaginationParamsDtoTest {
 
     /**
      * Test for the equals and hashCode methods.
@@ -14,8 +14,8 @@ public class SortingAndPaginationParamsTest {
     @Test
     public void testEqualsAndHashCode() {
         // Arrange
-        SortingAndPaginationParams params1 = new SortingAndPaginationParams("priority", "ASC", 1, 10);
-        SortingAndPaginationParams params2 = new SortingAndPaginationParams("priority", "ASC", 1, 10);
+        SortingAndPaginationParamsDto params1 = new SortingAndPaginationParamsDto("priority", "ASC", 1, 10);
+        SortingAndPaginationParamsDto params2 = new SortingAndPaginationParamsDto("priority", "ASC", 1, 10);
 
         // Assert
         assertEquals(params1, params2);
@@ -28,7 +28,7 @@ public class SortingAndPaginationParamsTest {
     @Test
     public void testGettersAndSetters() {
         // Arrange
-        SortingAndPaginationParams params = new SortingAndPaginationParams();
+        SortingAndPaginationParamsDto params = new SortingAndPaginationParamsDto();
         params.setSortBy("priority");
         params.setSortOrder("ASC");
         params.setPage(1);
@@ -47,8 +47,8 @@ public class SortingAndPaginationParamsTest {
     @Test
     public void testNotEqualsWithDifferentSortBy() {
         // Arrange
-        SortingAndPaginationParams params1 = new SortingAndPaginationParams("priority", "ASC", 1, 10);
-        SortingAndPaginationParams params2 = new SortingAndPaginationParams("deadline", "ASC", 1, 10);
+        SortingAndPaginationParamsDto params1 = new SortingAndPaginationParamsDto("priority", "ASC", 1, 10);
+        SortingAndPaginationParamsDto params2 = new SortingAndPaginationParamsDto("deadline", "ASC", 1, 10);
 
         // Assert
         assertNotEquals(params1, params2);
@@ -60,8 +60,8 @@ public class SortingAndPaginationParamsTest {
     @Test
     public void testNotEqualsWithDifferentSortOrder() {
         // Arrange
-        SortingAndPaginationParams params1 = new SortingAndPaginationParams("priority", "ASC", 1, 10);
-        SortingAndPaginationParams params2 = new SortingAndPaginationParams("priority", "DESC", 1, 10);
+        SortingAndPaginationParamsDto params1 = new SortingAndPaginationParamsDto("priority", "ASC", 1, 10);
+        SortingAndPaginationParamsDto params2 = new SortingAndPaginationParamsDto("priority", "DESC", 1, 10);
 
         // Assert
         assertNotEquals(params1, params2);
@@ -73,8 +73,8 @@ public class SortingAndPaginationParamsTest {
     @Test
     public void testNotEqualsWithDifferentPage() {
         // Arrange
-        SortingAndPaginationParams params1 = new SortingAndPaginationParams("priority", "ASC", 1, 10);
-        SortingAndPaginationParams params2 = new SortingAndPaginationParams("priority", "ASC", 2, 10);
+        SortingAndPaginationParamsDto params1 = new SortingAndPaginationParamsDto("priority", "ASC", 1, 10);
+        SortingAndPaginationParamsDto params2 = new SortingAndPaginationParamsDto("priority", "ASC", 2, 10);
 
         // Assert
         assertNotEquals(params1, params2);
@@ -86,8 +86,8 @@ public class SortingAndPaginationParamsTest {
     @Test
     public void testNotEqualsWithDifferentSize() {
         // Arrange
-        SortingAndPaginationParams params1 = new SortingAndPaginationParams("priority", "ASC", 1, 10);
-        SortingAndPaginationParams params2 = new SortingAndPaginationParams("priority", "ASC", 1, 20);
+        SortingAndPaginationParamsDto params1 = new SortingAndPaginationParamsDto("priority", "ASC", 1, 10);
+        SortingAndPaginationParamsDto params2 = new SortingAndPaginationParamsDto("priority", "ASC", 1, 20);
 
         // Assert
         assertNotEquals(params1, params2);
@@ -99,8 +99,8 @@ public class SortingAndPaginationParamsTest {
     @Test
     public void testNotEqualsWithNullSortBy() {
         // Arrange
-        SortingAndPaginationParams params1 = new SortingAndPaginationParams(null, "ASC", 1, 10);
-        SortingAndPaginationParams params2 = new SortingAndPaginationParams("priority", "ASC", 1, 10);
+        SortingAndPaginationParamsDto params1 = new SortingAndPaginationParamsDto(null, "ASC", 1, 10);
+        SortingAndPaginationParamsDto params2 = new SortingAndPaginationParamsDto("priority", "ASC", 1, 10);
 
         // Assert
         assertNotEquals(params1, params2);

@@ -1,6 +1,6 @@
 package com.cn.taskmanagement.service.usecase;
 
-import com.cn.taskmanagement.dto.SortingAndPaginationParams;
+import com.cn.taskmanagement.dto.SortingAndPaginationParamsDto;
 import com.cn.taskmanagement.dto.TaskDto;
 import com.cn.taskmanagement.model.Task;
 import com.cn.taskmanagement.repository.TaskRepository;
@@ -262,7 +262,7 @@ class TaskServiceImplTest {
     @Test
     void getAllTasksWithSortingAndPagination() {
         // Arrange
-        SortingAndPaginationParams params = new SortingAndPaginationParams("priority", "ASC", 0, 10);
+        SortingAndPaginationParamsDto params = new SortingAndPaginationParamsDto("priority", "ASC", 0, 10);
         Task task1 = new Task("Task 1", "Description 1", "TODO", "High", null);
         Task task2 = new Task("Task 2", "Description 2", "In Progress", "Medium", null);
 
@@ -287,7 +287,7 @@ class TaskServiceImplTest {
     @Test
     void getAllTasksWithSortingAndPagination_EmptyList() {
         // Arrange
-        SortingAndPaginationParams params = new SortingAndPaginationParams("priority", "ASC", 0, 10);
+        SortingAndPaginationParamsDto params = new SortingAndPaginationParamsDto("priority", "ASC", 0, 10);
 
         when(taskRepository.findAll((Sort) Mockito.any())).thenReturn(Collections.emptyList());
 

@@ -4,14 +4,14 @@ package com.cn.taskmanagement.dto;
  * Data Transfer Object (DTO) representing sorting and
  * pagination parameters for query requests.
  */
-public class SortingAndPaginationParams {
+public class SortingAndPaginationParamsDto {
     private String sortBy;
     private String sortOrder;
     private int page;
     private int size;
 
     // Default constructor
-    public SortingAndPaginationParams() {
+    public SortingAndPaginationParamsDto() {
     }
 
     /**
@@ -22,7 +22,7 @@ public class SortingAndPaginationParams {
      * @param page      The page number.
      * @param size      The number of items per page.
      */
-    public SortingAndPaginationParams(String sortBy, String sortOrder, int page, int size) {
+    public SortingAndPaginationParamsDto(String sortBy, String sortOrder, int page, int size) {
         this.sortBy = sortBy;
         this.sortOrder = sortOrder;
         this.page = page;
